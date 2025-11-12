@@ -297,7 +297,7 @@ methods to convert string input to other types. The following code shows how to 
 
 ```c#
 Console.Write("Enter your age: ");
-var age = Convert.ToUInt16(Console.ReadLine());
+var age = Convert.ToByte(Console.ReadLine());
 Console.WriteLine($"You're {age} year(s) old");
 ```
 
