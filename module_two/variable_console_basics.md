@@ -42,9 +42,12 @@ Let's say we have some entity `Entity` in one file and another entity also calle
 put the first entity in a namespace called `A` and the second in a namespace called `B`, we won't have a problem 
 since the first entity is now `A.Entity` and the second entity is now `B.Entity`.
 
-Namespaces in C# must reflect the location of a particular file relative to a project. Since the above code is from 
-a project called `HelloWorld`, the namespace is also called `HelloWorld`. Rider will automatically create the 
-correct namespace declaration for you, so you don't have to worry about getting it right.
+The general convention when it comes to naming namespaces is that they should reflect the project structure. Since
+the above code is from a project called `HelloWorld`, the namespace is also called `HelloWorld`. Rider will
+automatically create the correct namespace declaration for you, so you don't have to worry about getting it right.
+It's worth noting that namespaces are not required to follow this convention. This convention is generally a good
+convention to follow, but there may be reasons to not follow it in certain circumstances, so you may see some
+libraries not following it.
 
 ```c#
 internal static class Program {}
@@ -173,17 +176,16 @@ Let's say we want to declare an `int` variable. The following code shows how to 
 int number = 5;
 ```
 
+### Naming Conventions
+
 C# uses camelCase for naming local variables. C# also prefers using full words over abbreviations. That's why the 
-above variable was named `number` instead of `num`. When acronyms or initialisms are involved, and they appear in 
-the middle of a name, two-letter ones should be completely capitalized, while three-letter or longer ones should 
-only capitalize the first letter. The following code shows the difference.
+above variable was named `number` instead of `num`. When it comes to acronyms and initialisms, they should only be
+used when widely recognized. They should also act like words when it comes to capitalization. The following code
+demonstrates proper capitalization of acronyms and initialisms in C#.
 
 ```c#
 uint idNumber = 1; // all lowercase at beginning
-uint studentID = 2; // all uppercase in middle or at end
-
-uint dmvNumber = 3; // all lowercase at beginning
-bool employedAtDmv = false; // only first letter is uppercase
+uint studentId = 2; // first letter capitalized when in middle or at end
 ```
 
 ### `var` keyword
