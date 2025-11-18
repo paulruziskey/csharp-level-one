@@ -1,4 +1,4 @@
-# C# Variable and Console Basics
+# Variable and Console Basics
 
 ## Exploring a Hello-world Project
 
