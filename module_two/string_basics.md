@@ -235,3 +235,29 @@ The first -1 makes sense since "apple" comes before "banana" in the alphabet. Th
 because 'A' actually comes before 'a' in Unicode, and the comparison was case-sensitive. The third -1 is because 
 "apple" still comes before "banana"; case doesn't affect this answer. We then get 0 for the last answer since 
 "apple" and "APPLE" are the same word when compared case-insensitively.
+
+### Parsing Helpers
+
+It's often desirable to get rid of stray whitespace around a string when we need to parse it. C# strings have a 
+`Trim` method which strips leading and trailing whitespace characters. You can also use this method to strip other 
+things besides whitespace characters, but you'll mostly use it to strip whitespace characters.
+
+```c#
+Console.Write("Enter something: ");
+string trimmed_input = Console.ReadLine()!.Trim();
+Console.WriteLine($"You entered: \"{trimmed_input}\"");
+```
+
+The above code outputs the following to the console.
+
+```
+Enter something:         okay      
+You entered: "okay"
+```
+
+## String Immutability
+
+Strings in C# are *immutable*. This means they can't be changed once created. Even though a lot of string 
+methods in C# seem like they modify a string, they're actually creating a copy with the modified property and 
+returning that. This is important to know because it can affect the performance of your code. We'll learn 
+a big consequence of this in a later module.
