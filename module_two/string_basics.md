@@ -174,8 +174,10 @@ Console.WriteLine($"Index of 'p': {word.IndexOf('p')}");
 The above code outputs the following to the console.
 
 ```
-1
+Index of 'p': 1
 ```
+
+`IndexOf` can also be performed case-insensitively the same way `Contains` can.
 
 ### Equality
 
