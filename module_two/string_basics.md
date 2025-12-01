@@ -13,9 +13,9 @@ var sentence = "Hello, world!";
 
 #### Escape Sequences
 
-We can also include *escape characters* in string literals. Escape characters are characters which have been escaped 
-by the *escape character* (`\`). We can use these escape characters to include newlines and tabs in strings, among 
-other things. The following code demonstrates using escape characters for newline (`\n`) and tab (`\t`).
+We can also include *escape characters* in string literals. Escape characters are characters formed by escaping 
+another character with the *escape character* (`\`). We can use these escape characters to include newlines and tabs in
+strings, among other things. The following code demonstrates using escape characters for newline (`\n`) and tab (`\t`).
 
 ```c#
 Console.WriteLine("\tEach\nword\nwill\nbe\non\nits\nown\nline");
@@ -35,12 +35,12 @@ line
 ```
 
 We can also use the escape character to help us output characters we would otherwise have trouble with. For example, 
-you can't normally output a double quote since C# would treat it as the end of the string literal. The same problem 
-happens when trying to output a backslash since backslash is the escape character. The following code demonstrates 
-how we can output double quotes and backslashes using escape characters.
+you can't normally output a double quote since C# would treat it as the end of the string literal. A similar problem
+exists when trying to write a backslash character in a string literal since backslash is the escape character. The
+following code demonstrates how we can output double quotes and backslashes using escape characters.
 
 ```c#
-Console.WriteLine("Here is a \"backslash\": \\);
+Console.WriteLine("Here is a \"backslash\": \\");
 ```
 
 The above code outputs the following to the console.
