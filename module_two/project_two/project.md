@@ -1,1 +1,1 @@
-[Open project spec](https://rawcdn.githack.com/paulruziskey/csharp-level-one/49a74ae194e80e6c2ffbaa485c8402abf4d838af/module_two/project_two/project_two_string_reporter.html)
+[Open project spec](https://raw.githack.com/paulruziskey/csharp-level-one/c3d921983abf56652029c8c43162d6bc68e34c55/module_two/project_two/project_two_string_reporter.html)
