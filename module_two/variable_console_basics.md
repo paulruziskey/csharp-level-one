@@ -237,7 +237,7 @@ Console.WriteLine("world!");
 
 The above code produces the following output.
 
-```
+```text
 Hello, world!
 Hello, world!
 ```
