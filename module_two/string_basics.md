@@ -23,7 +23,7 @@ Console.WriteLine("\tEach\nword\nwill\nbe\non\nits\nown\nline");
 
 The above code outputs the following to the console.
 
-```
+```text
     Each
 word
 will
@@ -70,7 +70,7 @@ Console.WriteLine(dialog);
 
 The above code outputs the following to the console.
 
-```
+```text
 It was time to write some code.
     "Hello, world!" said the code.
     "Goodbye, code!" said the programmer, fearing his creation had
@@ -84,6 +84,31 @@ When declaring a raw string literal, the opening triple double quotes and the cl
 on their own lines. You can also include `$` before the opening triple double quotes to make it interpolated!
 
 ## String Properties and Methods
+
+### Concatenation
+
+*Concatenation* is when we combine multiple strings into one string. To concatenate strings, we use the *addition operator*
+(`+`).
+
+```c#
+Console.Write("Enter a word: ");
+string word1 = Console.ReadLine()!;
+Console.Write("Enter another word: ");
+string word2 = Console.ReadLine()!;
+Console.WriteLine(word1 + word2);
+```
+
+The above code outputs the following to the console.
+
+```text
+Enter a word: hello
+Enter another word: world
+helloworld
+```
+
+Concatenation is useful when we want to simply combine two or more strings. If we want to build a string from many
+different values, or if we want to combine a string literal and a value for outputting, it's better to use an interpolated
+string literal.
 
 ### `Length` Property and Indexing
 
@@ -136,7 +161,7 @@ Console.WriteLine(word[2..]);
 
 The above code outputs the following to the console.
 
-```
+```text
 ell
 hel
 llo
@@ -158,7 +183,7 @@ Console.WriteLine(word.Contains('a', StringComparison.OrdinalIgnoreCase)); // ca
 
 The above code outputs the following to the console.
 
-```
+```text
 False
 True
 ```
@@ -173,7 +198,7 @@ Console.WriteLine($"Index of 'p': {word.IndexOf('p')}");
 
 The above code outputs the following to the console.
 
-```
+```text
 Index of 'p': 1
 ```
 
@@ -196,7 +221,7 @@ Console.WriteLine(word1.Equals(word2, StringComparison.OrdinalIgnoreCase)); // c
 
 The above code outputs the following to the console.
 
-```
+```text
 False
 False
 True
@@ -224,7 +249,7 @@ Console.WriteLine(word1.CompareTo(word3, StringComparison.OrdinalIgnoreCase));
 
 The above code outputs the following to the console.
 
-```
+```text
 -1
 -1
 -1
@@ -250,7 +275,7 @@ Console.WriteLine($"You entered: \"{trimmed_input}\"");
 
 The above code outputs the following to the console.
 
-```
+```text
 Enter something:         okay      
 You entered: "okay"
 ```
