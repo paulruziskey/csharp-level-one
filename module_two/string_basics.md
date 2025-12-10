@@ -280,6 +280,23 @@ Enter something:         okay
 You entered: "okay"
 ```
 
+It's also possible to convert a string to all uppercase or all lowercase. We'll learn in the next module that it might be more desirable to convert a string to lowercase to compare it rather than using case-insensitive comparisons, so these methods are useful in those contexts.
+
+```c#
+Console.Write("Enter a word: ");
+string word = Console.ReadLine()!;
+Console.WriteLine(word.ToLower());
+Console.WriteLine(word.ToUpper());
+```
+
+The above code outputs the following to the console.
+
+```text
+Enter a word: Hello
+hello
+HELLO
+```
+
 ## String Immutability
 
 Strings in C# are *immutable*. This means they can't be changed once created. Even though a lot of string 
