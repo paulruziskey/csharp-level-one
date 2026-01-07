@@ -110,11 +110,11 @@ run the code.
 
 #### If-blocks
 
-Each if-statement is what's known as an *if-block*. If-blocks are conditional blocks constructed from an 
-if-statement; zero or more else-if-statements; and zero or one else-statement. Else-if-statements allow us to 
-specify additional conditions to check if none of the preceding conditions were true. Else-statements allow us to 
-specify a catch-all statement which will run if none of the conditions in an if-block were true. The following code 
-demonstrates using else-if-statements and an else-statement to check multiple conditions.
+Each if-statement is what's known as an *if-block*. If-blocks are conditional blocks constructed from an if-statement; 
+zero or more else-if-clauses; and zero or one else-clause. Else-if-clauses allow for us to specify additional 
+conditions to check if none of the preceding conditions were true. Else-clauses allow us to specify a catch-all 
+statement which will run if none of the conditions in an if-block were true. The following code demonstrates using 
+else-if-clauses and an else-clause to check multiple conditions.
 
 ```c#
 Console.Write("Enter a number: ");
@@ -249,14 +249,9 @@ case < 0 or > 100:
 }
 ```
 
-There are a couple of things to notice with this example. The first is that the default case can actually go 
-anywhere in a switch-statement, and it won't affect the logic. This also comes from C because it could change the 
-behavior when fallthrough was used, but in C#, it's more of party trick, so the default case should always go at the 
-end. The second is that we use the `and` and `or` keywords instead of the `&&` and `||` operators when checking 
-multiple patterns. This has to do with the fact that patterns are different from booleans. We won't get into what 
-patterns are just yet, but know that they have to be combined using `and` and `or` rather than `&&` and `||`. We can 
-also use the `not` keyword to negate a pattern instead of the `!` operator, but it's not widely used since we can 
-usually write the pattern to avoid it.
+One thing to note is that the default case can actually go anywhere in a switch-statement, and it won't affect the 
+logic. This also comes from C because it could change the behavior when fall-through was used, but in C#, it's more of 
+party trick, so the default case should always go at the end.
 
 Switch-statements can be used with values of any type. The following code demonstrates switching on a string.
 
@@ -326,7 +321,7 @@ else
 ```
 
 The `TryParse` method returns `true` if the input is valid, so in that case, the if-statement will run. If the input 
-is invalid, the else-statement will run! So, what's up with the `out int number`? The `TryParse` method uses what's 
+is invalid, the else-clause will run! So, what's up with the `out int number`? The `TryParse` method uses what's 
 known as an *output parameter* to give back the parsed integer on a successful parse. If the parsing is unsuccessful,
 this variable will be set to the default value for an integer which is its zero value. This is simply another way 
 for methods to send information back when they're done! This allows methods to more easily return multiple values in 
@@ -338,3 +333,84 @@ keyword would remain since that is required when specifying a variable for an ou
 The scope of output-parameter variables declared inline is the enclosing scope of the method call. This means that 
 `number` is scoped to the surrounding code rather than the if-statement. We will see later on that this affects 
 things in ways we may not expect.
+
+## What Are Conditional Expressions?
+
+Conditional expressions are expressions which evaluate to a value based on the result of a condition. Conditional 
+expressions can be a compact way to decide between several values.
+
+## Types of Conditional Expressions
+
+### Ternary Expression
+
+Ternary expressions are expressions formed using the *ternary operator* (`?:`). The ternary operator is an 
+interesting operator because it's the only operator that accepts three arguments. This is actually where it gets its 
+name: *unary* operators accept one argument, *binary* operators accept two arguments, and *ternary* operators accept 
+three arguments. Since it's the only operator that accepts three arguments, it became known as the ternary operator.
+
+Ternary expressions are used to decide between one of two values depending on the value of a boolean expression. The 
+following code demonstrates using a ternary expression to display the result of an evenness check in a user-friendly 
+way.
+
+```c#
+Console.Write("Enter an integer: ");
+var number = Convert.ToInt32(Console.ReadLine());
+string result = int.IsEvenInteger(number) ? "even" : "odd";
+Console.WriteLine($"Your number is {result}");
+```
+
+The above code outputs the following to the console.
+
+```text
+Enter an integer: 3
+Your number is odd
+```
+
+Ternary expressions are written as `condition ? valueIfTrue : valueIfFalse`. In the above example, the number 3 is 
+odd, so `int.IsEvenInteger` returned `false`, meaning the ternary expression evaluated to `"odd"`.
+
+We could have written the above code a bit more compactly by writing the ternary expression inside the interpolated 
+string. This is perfectly okay to do, we just have to remember to wrap it in parentheses so the interpolated string 
+doesn't get confused.
+
+```c#
+Console.Write("Enter an integer: ");
+var number = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine($"Your number is {(int.IsEvenInteger(number) ? "even" : "odd")}");
+```
+
+### Switch Expressions
+
+Switch statements have an expression version with a more compact syntax. Switch expressions follow the same logic as 
+switch statements, but they're written a little differently. They are also evaluated since they are expressions. The 
+following code demonstrates using a switch expression to print one of three possible messages depending on the 
+number a user enters.
+
+```c#
+Console.Write("Enter an integer: ");
+var number = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine(number switch
+{
+    < 0 => "Negative numbers are pretty cool",
+    > 0 => "Positive numbers are a little less cool, but still pretty cool",
+    0   => "Zero is an interesting number",
+});
+```
+
+The above code outputs the following to the console.
+
+```text
+Enter an integer: -4
+Negative numbers are pretty cool
+```
+
+We can see the syntax for switch expressions is more compact than the syntax for switch statements. We don't need 
+the `case` keyword, and the objects that come after each `=>` are what the switch expression will evaluate to if the 
+corresponding pattern is matched. Each option for a switch expression is known as an *arm*.
+
+One important thing to note is that switch expressions must be *exhaustive*. This means switch expressions will 
+throw an exception if none of the provided patterns match an object. In the above example, any integer could attempt 
+to be matched, and no matter what the integer is, it will always match one pattern.
+
+Another thing to note is that switch expressions only allow a single object to be provided in each arm. Unlike 
+switch statements which allow for multiple lines of code in each case, switch expressions only allow single objects.
