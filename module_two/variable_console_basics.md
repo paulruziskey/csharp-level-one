@@ -2,67 +2,6 @@
 
 ## Exploring a Hello-world Project
 
-Let's start by exploring the following program.
-
-```c#
-// Program.cs
-
-namespace HelloWorld;
-
-internal static class Program
-{
-    private static void Main()
-    {
-        Console.WriteLine("Hello, world!");
-    }
-}
-```
-
-This program prints "Hello, world!" to the console, but there's so much code here, it's hard to believe that's all 
-it does. Nearly all of this code is *boilerplate code*. Boilerplate code is code that we have to write because we're 
-required to, not because it does anything specific for our project. In modern C#, we can actually use what are 
-called *top-level statements* to avoid writing all of this boilerplate code. This is to make it easier to create 
-simple applications. This doesn't mean C# no longer needs the boilerplate code, it means C# generates it for us. 
-In this course, we're always going to write this boilerplate code since this is how C# really works, so it's 
-important to see it.
-
-Since we'll be writing it for all our projects, let's go through each part and figure out what it's doing at a basic 
-level. We'll learn about each of these constructs in more detail as we move throughout the course.
-
-```c#
-namespace HelloWorld;
-```
-
-This declares that the entities in the current file are part of the `HelloWorld` namespace. Namespaces are a way to 
-group entities under one name. C# doesn't allow for two entities to have the same name, so namespaces help qualify 
-names so we don't have to worry about potentially using the same name as something else in C# or in someone else's 
-library.
-
-Let's say we have some entity `Entity` in one file and another entity also called `Entity` in another file. If we 
-put the first entity in a namespace called `A` and the second in a namespace called `B`, we won't have a problem 
-since the first entity is now `A.Entity` and the second entity is now `B.Entity`.
-
-The general convention when it comes to naming namespaces is that they should reflect the project structure. Since
-the above code is from a project called `HelloWorld`, the namespace is also called `HelloWorld`. Rider will
-automatically create the correct namespace declaration for you, so you don't have to worry about getting it right.
-It's worth noting that namespaces are not required to follow this convention. This convention is generally a good
-convention to follow, but there may be reasons to not follow it in certain circumstances, so you may see some
-libraries not following it.
-
-```c#
-internal static class Program {}
-```
-
-This declares a class called `Program`. It's not important to understand classes right now, or what the other 
-keywords do, but you should know that all code aside from top-level declarations must go inside a class.
-
-```c#
-private static void Main() {}
-```
-
-This is the main method for your program, and it serves as the entry point. All C# executables must have a `Main` 
-method of some kind. We'll learn about methods later in the course, so don't worry about understanding them just yet.
-
 ```c#
 Console.WriteLine("Hello, world!");
 ```
@@ -82,7 +21,7 @@ comment.
 */
 ```
 
-The above code shows how to write single-line and multi-line comments. Multiline are only used in a few select 
+The above code shows how to write single-line and multi-line comments. Multiline comments are only used in a few select 
 situations, so you should stick to single-line comments. Single-line comments last from `//` to the end of the line. 
 Multi-line comments last from `/*` to `*/`.
 
