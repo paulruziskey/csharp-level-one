@@ -16,7 +16,7 @@ C# requires semicolons at the end of all statements. This tells the compiler whe
 ```c#
 // Single-line comment.
 /*
-Multi-line
+Multiline
 comment.
 */
 ```
