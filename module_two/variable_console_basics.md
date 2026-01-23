@@ -86,7 +86,7 @@ type of value these types are used to represent is a monetary value like a balan
 ### Unicode
 
 Unicode is how computers encode characters. Unicode replaced ASCII when computers started needing to be able to 
-represent more than 128 unique characters. There are four versions of Unicode: UTF-8, UTF-16, and UTF-32. We won't 
+represent more than 128 unique characters. There are three versions of Unicode: UTF-8, UTF-16, and UTF-32. We won't 
 be getting into Unicode in this course, but it's worth noting that C# uses UTF-16, which means characters are 
 represented using either 16 bits or 32 bits.
 
