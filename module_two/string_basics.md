@@ -285,9 +285,8 @@ Enter something:         okay
 You entered: "okay"
 ```
 
-It's also possible to convert a string to all uppercase or all lowercase. We'll learn in the next module that it might 
-be more desirable to convert a string to lowercase to compare it rather than using case-insensitive comparisons, so 
-these methods are useful in those contexts.
+It's also possible to convert a string to all uppercase or all lowercase. These methods can be helpful when it's not 
+possible to perform case-insensitive comparisons in the traditional way.
 
 ```c#
 Console.Write("Enter a word: ");
