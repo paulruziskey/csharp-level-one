@@ -87,8 +87,8 @@ on their own lines. You can also include `$` before the opening triple double qu
 
 ### Concatenation
 
-*Concatenation* is when we combine multiple strings into one string. To concatenate strings, we use the *addition operator*
-(`+`).
+*Concatenation* is when we combine multiple strings into one string. To concatenate strings, we use the *addition 
+operator* (`+`).
 
 ```c#
 Console.Write("Enter a word: ");
@@ -107,8 +107,8 @@ helloworld
 ```
 
 Concatenation is useful when we want to simply combine two or more strings. If we want to build a string from many
-different values, or if we want to combine a string literal and a value for outputting, it's better to use an interpolated
-string literal.
+different values, or if we want to combine a string literal and a value for outputting, it's better to use an 
+interpolated string literal.
 
 ### `Length` Property and Indexing
 
@@ -280,7 +280,9 @@ Enter something:         okay
 You entered: "okay"
 ```
 
-It's also possible to convert a string to all uppercase or all lowercase. We'll learn in the next module that it might be more desirable to convert a string to lowercase to compare it rather than using case-insensitive comparisons, so these methods are useful in those contexts.
+It's also possible to convert a string to all uppercase or all lowercase. We'll learn in the next module that it might 
+be more desirable to convert a string to lowercase to compare it rather than using case-insensitive comparisons, so 
+these methods are useful in those contexts.
 
 ```c#
 Console.Write("Enter a word: ");
