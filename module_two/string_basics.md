@@ -194,13 +194,18 @@ If we want to get the index value of the first occurrence of a particular charac
 ```c#
 const string word = "apple";
 Console.WriteLine($"Index of 'p': {word.IndexOf('p')}");
+Console.WriteLine($"Index of 'z': {word.IndexOf('z')}");
 ```
 
 The above code outputs the following to the console.
 
 ```text
 Index of 'p': 1
+Index of 'z': -1
 ```
+
+When checking for the index of a substring, the returned value will be the index value of the first character in the 
+substring. If there are no occurrences of a character or substring, `-1` is returned.
 
 `IndexOf` can also be performed case-insensitively the same way `Contains` can.
 
