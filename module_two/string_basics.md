@@ -305,7 +305,7 @@ HELLO
 
 ## String Immutability
 
-Strings in C# are *immutable*. This means they can't be changed once created. Even though a lot of string 
-methods in C# seem like they modify a string, they're actually creating a copy with the modified property and 
-returning that. This is important to know because it can affect the performance of your code. We'll learn 
-a big consequence of this in a later module.
+Strings in C# are *immutable*. This means they can't be changed once created. Even though a lot of string methods in 
+C# seem like they modify a string, they actually create a copy with the modified property and return that. This is 
+important to know because it can affect the performance of your code. We'll learn a big consequence of this in a later 
+module.
