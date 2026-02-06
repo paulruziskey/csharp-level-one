@@ -11,7 +11,7 @@ of things, so it depends on what kind of conditional statement you're using.
 
 #### Basic If-statements
 
-If statements are conditional statements which make a decision based on a boolean value. If the boolean value is 
+If-statements are conditional statements which make a decision based on a boolean value. If the boolean value is 
 `true`, the body of the if-statement is executed. If the boolean value is `false`, the body of the if-statement is 
 skipped. The following code demonstrates the simplest kind of if-statements.
 
@@ -111,9 +111,9 @@ run the code.
 #### If-blocks
 
 Each if-statement is what's known as an *if-block*. If-blocks are conditional blocks constructed from an if-statement; 
-zero or more else-if-clauses; and zero or one else-clause. Else-if-clauses allow for us to specify additional 
-conditions to check if none of the preceding conditions were true. Else-clauses allow us to specify a catch-all 
-statement which will run if none of the conditions in an if-block were true. The following code demonstrates using 
+zero or more else-if-clauses; and zero or one else-clauses. Else-if-clauses allow for us to specify additional 
+conditions to check if none of the preceding conditions were `true`. Else-clauses allow us to specify a catch-all 
+statement which will run if none of the conditions in an if-block were `true`. The following code demonstrates using 
 else-if-clauses and an else-clause to check multiple conditions.
 
 ```c#
@@ -138,18 +138,18 @@ else
 ```
 
 It's important to note how this is different from simply using four if-statements in a row. In an if-block, 
-conditions are only checked until a true condition is found. If a true condition is found, the body of the 
+conditions are only checked until a `true` condition is found. If a `true` condition is found, the body of the 
 associated statement runs, then the if-block is done. No remaining conditions will be checked. With four 
 if-statements in a row, each condition will be checked regardless of the outcome of the previous conditions. Whether 
 you want a bunch of if-statements or one if-block simply depends on what type of logic you need. Take a look at the 
-following output of the previous code.
+output of the previous code.
 
 ```text
 Enter a number: -1
 You entered a negative number!
 ```
 
-Notice how only the if-statement ran? `number < 0` was true, so the if-statement ran, then since the other 
+Notice how only the if-statement ran? `number < 0` was `true`, so the if-statement ran, then since the other 
 statements were part of the same if-block, they were skipped. Let's take a look at the same code, but using four 
 if-statements instead of one if-block.
 
@@ -183,12 +183,12 @@ You entered a single positive digit!
 ```
 
 Notice how some extra text printed that doesn't make sense? That's because the previous code was relying on if-block 
-logic to prevent later statements from running if a preceding statement was true. To make the new code act like the 
+logic to prevent later statements from running if a preceding statement was `true`. To make the new code act like the 
 old code, we would need to change the third condition `number < 10` to `number > 0 && number < 10`.
 
 ### Switch-statements
 
-Switch statements are another kind of conditional statement in C#. Switch-statements work by taking in a value and 
+Switch-statements are another kind of conditional statement in C#. Switch-statements work by taking in a value and 
 checking different cases for that value to decide what to do. Switch-statements are useful when we want to do 
 different things based on a particular value. The following example shows how to use a switch statement to print 
 different things depending on the value of a number.
@@ -409,7 +409,7 @@ the `case` keyword, and the objects that come after each `=>` are what the switc
 corresponding pattern is matched. Each option for a switch expression is known as an *arm*.
 
 One important thing to note is that switch expressions must be *exhaustive*. This means switch expressions will 
-throw an exception if none of the provided patterns match an object. In the above example, any integer could attempt 
+raise a syntax error if none of the provided patterns match an object. In the above example, any integer could attempt 
 to be matched, and no matter what the integer is, it will always match one pattern.
 
 Another thing to note is that switch expressions only allow a single object to be provided in each arm. Unlike 
