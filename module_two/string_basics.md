@@ -85,6 +85,43 @@ on their own lines. You can also include `$` before the opening triple double qu
 
 ## String Properties and Methods
 
+### Parsing Helpers
+
+It's often desirable to get rid of stray whitespace around a string when we need to parse it. C# strings have a 
+`Trim` method which strips leading and trailing whitespace characters. You can also use this method to strip other 
+things besides whitespace characters, but you'll mostly use it to strip whitespace characters.
+
+```c#
+Console.Write("Enter something: ");
+string trimmed_input = Console.ReadLine()!.Trim();
+Console.WriteLine($"You entered: \"{trimmed_input}\"");
+```
+
+The above code outputs the following to the console.
+
+```text
+Enter something:         okay      
+You entered: "okay"
+```
+
+It's also possible to convert a string to all uppercase or all lowercase. These methods can be helpful when it's not 
+possible to perform case-insensitive comparisons in the traditional way.
+
+```c#
+Console.Write("Enter a word: ");
+string word = Console.ReadLine()!;
+Console.WriteLine(word.ToLower());
+Console.WriteLine(word.ToUpper());
+```
+
+The above code outputs the following to the console.
+
+```text
+Enter a word: Hello
+hello
+HELLO
+```
+
 ### Concatenation
 
 *Concatenation* is when we combine multiple strings into one string. To concatenate strings, we use the *addition 
@@ -169,16 +206,20 @@ llo
 
 ### Inclusion
 
+#### `Contains` and `ContainsAny` Methods
+
 If we want to check if a string contains a particular character or substring, we can use the `Contains` method. We 
 can use the method alone to check for a particular character or substring as written, or we can include an 
 additional argument to specify that the check should be done *case-insensitively*. This means that we could ask if a 
 string contains the letter a by only checking `'a'` case-insensitively. The following code demonstrates both uses of 
-the `Contains` method.
+the `Contains` method. It also demonstrates searching for a substring both case-sensitively and case-insensitively.
 
 ```c#
 const string word = "Apple";
-Console.WriteLine(word.Contains('a')); // case-sensitive
-Console.WriteLine(word.Contains('a', StringComparison.OrdinalIgnoreCase)); // case-insensitive
+Console.WriteLine(word.Contains('a')); // case-sensitive single-character search
+Console.WriteLine(word.Contains('a', StringComparison.OrdinalIgnoreCase)); // case-insensitive single-character search
+Console.WriteLine(word.Contains("app")); // case-sensitive substring search
+Console.WriteLine(word.Contains("app", StringComparison.OrdinalIgnoreCase)); // case-insensitive substring search
 ```
 
 The above code outputs the following to the console.
@@ -186,7 +227,98 @@ The above code outputs the following to the console.
 ```text
 False
 True
+False
+True
 ```
+
+Sometimes we want to search for one of many possible characters in a string. We can do this using the `ContainsAny` 
+method. This method is a bit more complicated to use than the plain `Contains` method because C# requires a specialized 
+argument when we specify the characters to look for. This is done to increase the efficiency of the search. To use the
+`ContainsAny` method, we need to create a `SearchValues` object out of the characters. The following code demonstrates 
+searching a string for any vowels.
+
+```c#
+const string word = "hello";
+Console.WriteLine($"`word` contains vowels: {word.ContainsAny(System.Buffers.SearchValues.Create('a', 'e', 'i', 'o', 'u'))}");
+```
+
+The above code outputs the following to the console.
+
+```text
+`word` contains vowels: True
+```
+
+To create a `SearchValues` object, we use the `Create` method. That much might be straightforward, but what's with the
+`System.Buffers` prefix?
+
+##### Namespaces
+
+A *namespace* is like a virtual folder for a particular piece of code. C# code is organized into various namespaces to 
+keep different parts of the language organized. This helps make sure data types with similar names are kept separate so 
+they won't conflict with each other. Older languages had this problem of names conflicting a lot, so a lot of languages 
+these days have something like namespaces to help separate code.
+
+`System` is a namespace for basic C# code. This is where you'll find all of the code we'll be using in this course.
+`Buffers` is a namespace within the `System` namespace which holds data types related to storing values and objects. 
+We'll learn what buffers are later in the course. The `SearchValues` data type is meant for storing data to be searched 
+for, which is why it's in the `Buffers` namespace.
+
+Now that we know about namespaces, does this mean some of the data types we use will require long names all the time?
+
+##### Using-statements
+
+Fear not, because C# has *using-statements*. Using-statements allow us to bring a name from a namespace into the
+*global namespace*. You can think of the global namespace as the top namespace, meaning anything in the global 
+namespace doesn't require any prefixes to use it. The data types we've been using so far are all part of this global 
+namespace! Additionally, new C# projects are set up to automatically put a bunch of commonly used types into the global 
+namespace so we don't have to think about it. For any types that aren't already in the global namespace, we can use a 
+using-statement to bring the names from a particular namespace into the global namespace. The following code 
+demonstrates using a using-statement to bring the `SearchValues` type and other types in the `System.Buffers` namespace 
+into the global namespace. It's the same code as before, but now the `SearchValues` type doesn't require a namespace 
+prefix!
+
+```c#
+using System.Buffers;
+
+const string word = "hello";
+Console.WriteLine($"`word` contains vowels: {word.ContainsAny(SearchValues.Create('a', 'e', 'i', 'o', 'u'))}");
+```
+
+Using-statements are always used to make sure we don't have to type namespaces in front of the types we use. The only 
+time they can't be used is if you need to use different data types from different namespaces that happen to have the 
+same name. This is rare, but if it does happen, you can rely on the namespace to help differentiate them!
+
+Using-statements always go at the top of your code, and they should be written in alphabetical order according to the 
+namespaces.
+
+For simplicity, the above code can be written with all the characters in one string. Now that you know about 
+using-statements, you should assume a using-statement is present in any code snippets where it's not visible. In these 
+lessons, using statements will always be included the first time a type is used. They will then be assumed for 
+subsequent occurrences.
+
+```c#
+const string word = "hello";
+Console.WriteLine($"`word` contains vowels: {word.ContainsAny(SearchValues.Create("aeiou"))}");
+```
+
+If you want to perform this search case-insensitively, the easiest way is to lowercase the string first before 
+searching. There is a way to create a `SearchValues` object that performs case-insensitive searching, but it's much 
+more difficult given what you currently know. The following code demonstrates this.
+
+```c#
+const string word = "HELLO";
+Console.WriteLine($"`word` contains vowels: {word.ContainsAny(SearchValues.Create("aeiou"))}");
+Console.WriteLine($"`word` contains vowels: {word.ToLower().ContainsAny(SearchValues.Create("aeiou"))}");
+```
+
+The above code outputs the following to the console.
+
+```text
+`word` contains vowels: False
+`word` contains vowels: True
+```
+
+#### `IndexOf`, `LastIndexOf`, `IndexOfAny`, and `LastIndexOfAny` Methods
 
 If we want to get the index value of the first occurrence of a particular character or substring, we can use the 
 `IndexOf` method. The following code demonstrates this.
@@ -195,6 +327,7 @@ If we want to get the index value of the first occurrence of a particular charac
 const string word = "apple";
 Console.WriteLine($"Index of 'p': {word.IndexOf('p')}");
 Console.WriteLine($"Index of 'z': {word.IndexOf('z')}");
+Console.WriteLine($"Index of \"ple\": {word.IndexOf("ple")}");
 ```
 
 The above code outputs the following to the console.
@@ -202,12 +335,70 @@ The above code outputs the following to the console.
 ```text
 Index of 'p': 1
 Index of 'z': -1
+Index of "ple": 2
 ```
 
 When checking for the index of a substring, the returned value will be the index value of the first character in the 
 substring. If there are no occurrences of a character or substring, `-1` is returned.
 
-`IndexOf` can also be performed case-insensitively the same way `Contains` can.
+Sometimes we want to find additional occurrences of characters or substrings after the first occurrence. We can do this 
+by providing the `IndexOf` method with a starting index value so it will only find occurrences from that index value to 
+the end of the string. The following code demonstrates this.
+
+```c#
+const string word = "apple";
+int indexOfFirstP = word.IndexOf('p');
+int indexOfSecondP = word.IndexOf('p', indexOfFirstP + 1);
+Console.WriteLine($"Index values of 'p': {indexOfFirstP}, {indexOfSecondP}");
+```
+
+The above code outputs the following to the console.
+
+```text
+Index values of 'p': 1, 2
+```
+
+Additionally, we can provide a count of how many characters should be searched in total. The following code 
+demonstrates finding the index of a substring only in the first half of a string.
+
+```c#
+const string phrase = "appleapple";
+Console.WriteLine($"Index of \"ea\": {phrase.IndexOf("ea", 0, 5)}"); // starting at index 0 searching 5 characters
+Console.WriteLine($"Index of \"ea\": {phrase.IndexOf("ea", 0, 6)}"); // starting at index 0 searching 6 characters
+```
+
+The above code outputs the following to the console.
+
+```text
+Index of "ea": -1
+Index of "ea": 4
+```
+
+The first call to `IndexOf` returns -1 since there is no "ea" within the first five characters of the string. When the 
+count is set to 6, the "ea" in the string can now be located.
+
+`IndexOf` can be performed case-insensitively the same way `Contains` can.
+
+If you want the last occurrence of a character or substring instead of the first, you can use the `LastIndexOf` method.
+
+Just like the `ContainsAny` method, there is an equivalent `IndexOfAny` method which will get the index value of the 
+first occurrence of one of a bunch of characters. The following code demonstrates this.
+
+```c#
+const string word = "hello";
+Console.WriteLine($"Index of the first vowel: {word.IndexOfAny(SearchValues.Create("aeiou"))}");
+```
+
+The above code outputs the following to the console.
+
+```text
+Index of the first vowel: 1
+```
+
+`IndexOfAny` can be performed case-insensitively the same way `ContainsAny` can.
+
+If you want the last occurrence of one of a bunch of characters instead of the first occurrence, you can use the
+`LastIndexOfAny` method.
 
 ### Equality
 
@@ -265,43 +456,6 @@ The first -1 makes sense since "apple" comes before "banana" in the alphabet. Th
 because 'A' actually comes before 'a' in Unicode, and the comparison was case-sensitive. The third -1 is because 
 "apple" still comes before "banana"; case doesn't affect this answer. We then get 0 for the last answer since 
 "apple" and "APPLE" are the same word when compared case-insensitively.
-
-### Parsing Helpers
-
-It's often desirable to get rid of stray whitespace around a string when we need to parse it. C# strings have a 
-`Trim` method which strips leading and trailing whitespace characters. You can also use this method to strip other 
-things besides whitespace characters, but you'll mostly use it to strip whitespace characters.
-
-```c#
-Console.Write("Enter something: ");
-string trimmed_input = Console.ReadLine()!.Trim();
-Console.WriteLine($"You entered: \"{trimmed_input}\"");
-```
-
-The above code outputs the following to the console.
-
-```text
-Enter something:         okay      
-You entered: "okay"
-```
-
-It's also possible to convert a string to all uppercase or all lowercase. These methods can be helpful when it's not 
-possible to perform case-insensitive comparisons in the traditional way.
-
-```c#
-Console.Write("Enter a word: ");
-string word = Console.ReadLine()!;
-Console.WriteLine(word.ToLower());
-Console.WriteLine(word.ToUpper());
-```
-
-The above code outputs the following to the console.
-
-```text
-Enter a word: Hello
-hello
-HELLO
-```
 
 ## String Immutability
 
