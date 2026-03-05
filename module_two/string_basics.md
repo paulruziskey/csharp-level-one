@@ -49,14 +49,75 @@ The above code outputs the following to the console.
 Here is a "backslash": \
 ```
 
+### Verbatim String Literals
+
+Sometimes we want to write strings which would need to contain a lot of escape sequences. This is often the case when 
+writing out file paths on Windows since Windows uses backslashes to separate directories and files. Rather than having 
+to escape all those backslashes, we could use a *verbatim string literal*! To make one, we simply prepend the *verbatim 
+identifier* (`@`) to a regular string literal. The following demonstrates writing the same string using both a regular 
+string literal and a verbatim string literal.
+
+```c#
+const string filePathRegular = "C:\\Users\\Username\\Documents\\myFile.txt";
+const string filePathVerbatim = @"C:\Users\Username\Documents\myFile.txt";
+Console.WriteLine(filePathRegular);
+Console.WriteLine(filePathVerbatim);
+```
+
+The above code outputs the following to the console.
+
+```text
+C:\Users\Username\Documents\myFile.txt
+C:\Users\Username\Documents\myFile.txt
+```
+
+We can see from the output that both literals create the same string, but the verbatim string literal was much easier 
+to write!
+
+Verbatim string literals ignore all escape sequences so you don't have to worry about escaping backslashes. This can 
+cause problems if you need to display double quotes inside a verbatim string literal, so a different escape sequence 
+was added for this. If you want to display double quotes in a verbatim string literal, simply write two back to back! 
+The following code demonstrates this.
+
+```c#
+const string message = @"The file path is ""C:\Users\Username\Documents\myFile.txt""";
+Console.WriteLine(message);
+```
+
+The above code outputs the following to the console.
+
+```text
+The file path is "C:\Users\Username\Documents\myFile.txt"
+```
+
+It's pretty typical, however, to use raw string literals if you want both backslashes and double quotes in a string 
+literal.
+
+We can also create a verbatim interpolated string literal by prepending both `@` and `$` to the literal.
+
+```c#
+const string username = "John Smith";
+const string message = @$"The file path is ""C:\Users\{username}\Documents\myFile.txt""";
+Console.WriteLine(message);
+```
+
+The above code outputs the following to the console.
+
+```text
+The file path is "C:\Users\John Smith\Documents\myFile.txt"
+```
+
+It doesn't matter whether you write `@$` or `$@`; they're both treated the same, so be consistent!
+
 ### Raw String Literals
 
 Sometimes we want to write strings which would end up spanning multiple lines in the console. This means we would 
 need to include a lot of newline characters, which would make it a bit hard to read the string. This is where *raw 
 string literals* come in! These string literals will ignore all escape sequences, meaning backslashes will work just 
-fine without escaping. Raw strings also let us span multiple lines, and any formatting in a raw string literal 
-becomes part of the final string! This means if we indent in the raw string, the indentation will be in the actual 
-string! The following code demonstrates creating a string from a raw string literal.
+fine without escaping. In other words, raw string literals are automatically treated as verbatim. Raw strings also let 
+us span multiple lines, and any formatting in a raw string literal becomes part of the final string! This means if we 
+indent in the raw string, the indentation will be in the actual string! The following code demonstrates creating a 
+string from a raw string literal.
 
 ```c#
 const string dialog = """
