@@ -2,8 +2,7 @@
 
 ## What Are Conditional Statements?
 
-Conditional statements are statements which make a decision based on a condition. This condition could be a number 
-of things, so it depends on what kind of conditional statement you're using.
+Conditional statements are simple statements which conditionally execute other statements.
 
 ## Types of Conditional Statements
 
@@ -300,44 +299,9 @@ Trying to run the above code would result in a syntax error since `not 5` covers
 negative numbers and comes after `not 5`. To get this code to run, either the second case would have to go before 
 the first case, or the first case would have to be rewritten to avoid matching negative numbers.
 
-## Using If-statements to Parse Inputs
-
-Until now, any bad input results in an exception being thrown. This isn't great since it's not unexpected for a user 
-to accidentally enter the wrong thing. It's also possible that people may try to abuse a piece of software by 
-entering bad inputs. Luckily, C# provides methods to help with parsing basic data types! Each basic built-in type 
-has a `TryParse` method which will return a boolean signaling whether valid input was entered. Let's take a look at 
-some code using the `TryParse` method for integers.
-
-```c#
-Console.Write("Enter an integer: ");
-if (int.TryParse(Console.ReadLine(), out int number)) 
-{
-    Console.WriteLine($"You entered {number} as your number!");
-}
-else
-{
-    Console.WriteLine("Your input was invalid");
-}
-```
-
-The `TryParse` method returns `true` if the input is valid, so in that case, the if-statement will run. If the input 
-is invalid, the else-clause will run! So, what's up with the `out int number`? The `TryParse` method uses what's 
-known as an *output parameter* to give back the parsed integer on a successful parse. If the parsing is unsuccessful,
-this variable will be set to the default value for an integer which is its zero value. This is simply another way 
-for methods to send information back when they're done! This allows methods to more easily return multiple values in 
-more convenient ways. In the case of the above code, the variable which will get the output parameter's value is 
-declared as part of the method call, but it can be done differently. It's possible to declare the variable ahead of 
-time and simply use it as part of the method call. In this case, the data type would be omitted, but the `out` 
-keyword would remain since that is required when specifying a variable for an output parameter.
-
-The scope of output-parameter variables declared inline is the enclosing scope of the method call. This means that 
-`number` is scoped to the surrounding code rather than the if-statement. We will see later on that this affects 
-things in ways we may not expect.
-
 ## What Are Conditional Expressions?
 
-Conditional expressions are expressions which evaluate to a value based on the result of a condition. Conditional 
-expressions can be a compact way to decide between several values.
+Conditional expressions are expressions which conditionally evaluate to one of several possible values.
 
 ## Types of Conditional Expressions
 
