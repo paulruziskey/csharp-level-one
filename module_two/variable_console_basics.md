@@ -9,8 +9,6 @@ Console.WriteLine("Hello, world!");
 This is a C# print statement. It prints the text "Hello, world!" to the console followed by a newline. This is the 
 print statement you'll use most of the time.
 
-C# requires semicolons at the end of all statements. This tells the compiler when a thought is complete.
-
 ## Comments
 
 ```c#
@@ -21,9 +19,9 @@ comment.
 */
 ```
 
-The above code shows how to write single-line and multi-line comments. Multiline comments are only used in a few select 
+The above code shows how to write single-line and multiline comments. Multiline comments are only used in a few select 
 situations, so you should stick to single-line comments. Single-line comments last from `//` to the end of the line. 
-Multi-line comments last from `/*` to `*/`.
+Multiline comments last from `/*` to `*/`.
 
 ## Basic Data Types
 
@@ -34,7 +32,7 @@ The following table shows the basic C# data types and some information about the
 | `Boolean` | `bool`    | 8            | `false`    | Integral                            |
 | `Byte`    | `byte`    | 8            | `0`        | Integral                            |
 | `SByte`   | `sbyte`   | 8            | `0`        | Integral                            |
-| `Char`    | `char`    | 16           | `'\0'`     | Unicode (UTF-16)                    |
+| `Char`    | `char`    | 16           | `'\0'`     | Integral, Unicode (UTF-16)          |
 | `Int16`   | `short`   | 16           | `0`        | Integral                            |
 | `UInt16`  | `ushort`  | 16           | `0`        | Integral                            |
 | `Int32`   | `int`     | 32           | `0`        | Integral                            |
@@ -44,10 +42,20 @@ The following table shows the basic C# data types and some information about the
 | `UInt64`  | `ulong`   | 64           | `0UL`      | Integral                            |
 | `Double`  | `double`  | 64           | `0.0`      | Binary Floating-point (binary64)    |
 | `Decimal` | `decimal` | 128          | `0.0M`     | Decimal Floating-point (decimal128) |
-| `String`  | `string`  | Unspecified  | `""`       | Unicode Sequence (UTF-16)           |
+| `String`  | `string`  | Unspecified  | `null`     | Unicode Sequence (UTF-16)           |
 
 Each of the above types has an alias. These aliases are simply other names for the types. These aliases allow us to 
 use more common names for these types, so they are preferred. For example, `int` should be preferred over `Int32`.
+
+The zero values for each type are whatever value is considered to be the equivalent of 0 for a given type. For numeric 
+types, this is pretty straightforward. For `bool` and `char`, things are a little more interesting. For booleans, 
+between `true` and `false`, `false` is the closest to 0. For characters, '\0' is called the *null character*. This is 
+simply the character represented by 0.
+
+`string` is the most interesting since its zero value is the only one that doesn't represent a valid value for the 
+type. If you tried to do anything with a null string, you would get a `NullReferenceException`. This is because `null` 
+is not the same thing as an empty string. We'll learn more about what `null` is and why the `string` type is different 
+from the rest later in the course, so for now, just think of it as another data type.
 
 The following table includes newer basic types that extend the existing basic types. While these types are still 
 basic types, you won't really use them much. This table is mainly for completion so you know what they are if you 
@@ -58,6 +66,10 @@ see code that uses them.
 | `Half`    | 16           | `(Half)0.0F`   | Binary Floating-point (binary16) |
 | `Int128`  | 128          | `(Int128)0L`   | Integral                         |
 | `UInt128` | 128          | `(UInt128)0UL` | Integral                         |
+
+The syntax for the zero values for these types is a bit strange because C# doesn't have dedicated literals for these 
+types. These types were added after the original types, so the language wasn't originally built for them. We'll learn 
+more about this syntax in the next lesson.
 
 Let's go over the type classifications
 
@@ -103,17 +115,74 @@ will discuss these concepts later, so it's good enough for now to know the seman
 
 ## Variables
 
-The syntax for variables in C# is as follows.
+### Declaring and Initializing Variables
+
+C# requires us to declare variables before we can use them. The following shows the syntax for declaring a variable in 
+C#.
+
+```c#
+<type> <name>;
+```
+
+If we want to declare an `int` variable called `number`, the following code would do so.
+
+```c#
+int number;
+```
+
+This tells C# to create a variable called `number` which stores 32-bit integers and reserve memory for it. All 
+variables in C# are *zero-initialized*, which means they are automatically assigned the zero value for the type.
+
+Given the following code, what should be printed to the console?
+
+```c#
+int number;
+Console.WriteLine(number);
+```
+
+Unfortunately, the code above won't compile. This is because C# requires us to manually initialize all local variables, 
+even though they're zero-initialized. This means you have to make sure to assign your variables values before you can 
+read their stored values. The following shows the syntax for assigning a value to a variable. If we are assigning a 
+value to a variable for the first time, we call it *initializing* a variable because we are assigning it its initial 
+value.
+
+```c#
+<name> = <value>;
+```
+
+We could update the code above to initialize the `number` variable before attempting to print its value.
+
+```c#
+int number;
+number = 5;
+Console.WriteLine(number);
+```
+
+The above code outputs the following to the console.
+
+```text
+5
+```
+
+The `=` operator is known as the *assignment operator*. Be careful to avoid calling it the "equals operator" or 
+anything similar since that actually refers to a different operator.
+
+Since we always need to initialize our variables, it would be a bit silly if we always had to do it on a separate line. 
+C# allows us to both declare and initialize variables using the following syntax.
 
 ```c#
 <type> <name> = <value>;
 ```
 
-Let's say we want to declare an `int` variable. The following code shows how to do this.
+We could update the above code to put the declaration and initialization of `number` on the same line.
 
 ```c#
 int number = 5;
+Console.WriteLine(number);
 ```
+
+You will mostly declare and initialize variables on the same line, but there will be times where you only want to 
+declare a variable, so keep both types of syntax in mind.
 
 ### Naming Conventions
 
@@ -127,6 +196,27 @@ uint idNumber = 1; // all lowercase at beginning
 uint studentId = 2; // first letter capitalized when in middle or at end
 ```
 
+### Using Keywords as Variable Names
+
+There may be times when you wish to use a name for a variable, but you can't because it's reserved by the language. 
+This usually isn't a problem, but if you have a really good reason for needing to use a keyword as a variable name, you 
+can prepend the *verbatim identifier* (`@`) to the name. The following code demonstrates using the `string` keyword 
+as a variable name.
+
+```c#
+string @string = "hello";
+Console.WriteLine(@string);
+```
+
+The above code outputs the following to the console.
+
+```text
+hello
+```
+
+This is a bad example for why you would want to do this since the name `string` doesn't say anything about the purpose 
+of the variable, but it illustrates how you would do it.
+
 ### `var` keyword
 
 The `var` keyword can be used in place of a type to have C# deduce the type from the right-hand side. You should use 
@@ -139,6 +229,55 @@ var number = 5;
 
 This keyword will also allow us to avoid repeating data types later on when we start using other data types.
 
+### Declaring and Initializing Multiple Variables
+
+It's possible to declare multiple variables on the same line. The following code demonstrates declaring two integer 
+variables at the same time.
+
+```c#
+int x, y;
+```
+
+Both `x` and `y` will be declared with the `int` type. This only works if you want the variables to all have the same 
+type. While this can shorten your code, it can make it harder to read pretty quickly, so you should only declare 
+multiple variables on the same line if they're related in some way. For example, declaring `x` and `y` which presumably 
+represent a coordinate together. Unrelated variables of the same type should be declared on different lines.
+
+We can initialize multiple variables on the same line as well. The following code demonstrates this.
+
+```c#
+int x = 0, y = 0;
+```
+
+When doing multiple declarations and initializations you are required to use concrete types, so `var` wouldn't work 
+here.
+
+While this works, the best practice is to *always initialize variables on separate lines* when they're being declared 
+and initialized on the same line. There will be a few places where we can't avoid this, so we'll discuss them when they 
+come up. You may see this in other people's code, but just know that you shouldn't write code like this just because 
+someone else did. You should strive to write the most readable code you can!
+
+### Multiple Assignment
+
+Variables can be assigned to the same value at the same time. The following code demonstrates declaring multiple 
+variables and assigning them the value of 0.
+
+```c#
+int x, y, z;
+x = y = z = 0;
+```
+
+`x`, `y`, and `z` will all be assigned the value 0. This is acceptable to do in code, but you must be aware that this 
+won't always do what you expect. For primitive values and strings, this will always work as expected, but we'll learn 
+what can go wrong when it comes to doing this with other types of values.
+
+#### Assignments Are Expressions
+
+Multiple assignment works in C# because variable assignments are expressions. This means variable assignments are 
+evaluated, and their evaluated values are simply the value that was assigned. This means we can do cool things with 
+variable assignments when we need to later on, so remember this! We need to learn a bit more about C# before it will 
+make sense how to use this information.
+
 ## Constants
 
 Constants are variables whose values are known at compile-time and whose values won't change. This essentially means 
@@ -149,9 +288,10 @@ arguments are also constants. The following code demonstrates creating a local c
 const double g = 9.81;
 ```
 
-Type deduction is not allowed when declaring a constant, so `var` can't be used. When C# compiles your code, it will 
-copy the values in each constant and paste them wherever the constants are used. This is why constant values have to 
-be known at compile-time. The following code shows how C# processes constants.
+Constants are required to be declared and initialized on the same line. Type deduction is not allowed when declaring a 
+constant, so `var` can't be used. When C# compiles your code, it will copy the values in each constant and paste them 
+wherever the constants are used. This is why constant values have to be known at compile-time. The following code shows 
+how C# processes constants.
 
 ```c#
 // This is the code as written.
@@ -163,6 +303,17 @@ Console.WriteLine(9.81);
 ```
 
 Constants should be used whenever possible since they won't actually exist at runtime.
+
+### Using Keywords as Constant Names
+
+The same trick we used to be able to use keywords as variable names can be used with constant names, too. The following 
+code demonstrates creating a constant called `int`.
+
+```c#
+const int @int = 5;
+```
+
+`int` is certainly a bad name for a constant, but it illustrates how you would use a keyword as a constant name.
 
 ## Console Output
 
