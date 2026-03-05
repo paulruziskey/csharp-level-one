@@ -39,10 +39,9 @@ if (true)
 ```
 
 One important thing to understand about if-statements in C# is that they only actually accept one statement to run 
-as their bodies. This seems strange considering the previous if-statement had a two line body! It turns out the 
-curly brackets are actually grouping the two statements into one by forming a code block. The if-statement then 
-executes this code block. This means the curly brackets are optional for one-line if-statements as far as C#'s 
-syntax is concerned.
+as their bodies. If we want to run more than one statement, we need to use a compound statement, which can be created 
+using curly brackets as we learned before. This means the curly brackets are optional for one-line if-statements as far 
+as C#'s syntax is concerned.
 
 ```c#
 if (true) Console.WriteLine("Hello, world!");
