@@ -358,6 +358,20 @@ Console.WriteLine($"I think {luckyNumber} is my lucky number!");
 Interpolated strings are created by prepending a `$` to a string literal. C# expressions can then be put inside 
 curly brackets.
 
+What if we want to write curly brackets inside an interpolated string literal? We can simply double them up to escape 
+them!
+
+```c#
+const int number = 5;
+Console.WriteLine($"The {{number}} is {number}");
+```
+
+The above code outputs the following to the console.
+
+```text
+The {number} is 5
+```
+
 We can also do formatting with interpolated strings which we'll look at later. Interpolated strings should be 
 preferred over string concatenation.
 
