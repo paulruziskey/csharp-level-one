@@ -154,8 +154,8 @@ things besides whitespace characters, but you'll mostly use it to strip whitespa
 
 ```c#
 Console.Write("Enter something: ");
-string trimmed_input = Console.ReadLine()!.Trim();
-Console.WriteLine($"You entered: \"{trimmed_input}\"");
+string trimmedInput = Console.ReadLine()!.Trim();
+Console.WriteLine($"You entered: \"{trimmedInput}\"");
 ```
 
 The above code outputs the following to the console.
