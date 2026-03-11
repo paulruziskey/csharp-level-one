@@ -198,6 +198,6 @@ declared as part of the method call, but it can be done differently. It's possib
 time and simply use it as part of the method call. In this case, the data type would be omitted, but the `out`
 keyword would remain since that is required when specifying a variable for an output parameter.
 
-The scope of output-parameter variables declared inline is the enclosing scope of the method call. This means that
-`number` is scoped to the surrounding code rather than the if-statement. We will see later on that this affects
-things in ways we may not expect.
+The scope of output-parameter variables declared as part of a conditional statement is the enclosing scope of the 
+conditional statement. This allows else-if-clauses and else-clauses to make use of the output-parameter variable, but 
+it also means you can use these output-parameter variables after conditional statements and blocks.
