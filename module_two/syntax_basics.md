@@ -15,6 +15,16 @@ Console.WriteLine("Hello, world!");
 
 C# requires semicolons at the end of all simple statements.
 
+The simplest statement in C# is the *null statement*. Null statements are created using a single semicolon.
+
+```c#
+;
+```
+
+The above code shows a null statement in C#. This statement doesn't look useful at all, and it's not! Why does C# allow 
+them, then? They're used to enable certain syntax that otherwise wouldn't be possible. We'll be seeing an example at 
+the end of the next module!
+
 ### Compound Statements
 
 *Compound statements* are statements which contain sequences of statements. Compound statements in C# are created 
