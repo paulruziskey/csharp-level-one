@@ -116,7 +116,7 @@ need to include a lot of newline characters, which would make it a bit hard to r
 string literals* come in! These string literals will ignore all escape sequences, meaning backslashes will work just 
 fine without escaping. In other words, raw string literals are automatically treated as verbatim. Raw strings also let 
 us span multiple lines, and any formatting in a raw string literal becomes part of the final string! This means if we 
-indent in the raw string, the indentation will be in the actual string! The following code demonstrates creating a 
+indent in a raw string, the indentation will be in the actual string! The following code demonstrates creating a 
 string from a raw string literal.
 
 ```c#
@@ -400,7 +400,7 @@ Index of "ple": 2
 ```
 
 When checking for the index of a substring, the returned value will be the index value of the first character in the 
-substring. If there are no occurrences of a character or substring, `-1` is returned.
+substring. If there are no occurrences of a character or substring, -1 is returned.
 
 Sometimes we want to find additional occurrences of characters or substrings after the first occurrence. We can do this 
 by providing the `IndexOf` method with a starting index value so it will only find occurrences from that index value to 
