@@ -76,3 +76,37 @@ the literal values they're written with. Expressions can have *side effects* whe
 causes something else to happen. Sometimes we only want to evaluate an expression for its side effects rather than 
 its value. In C#, we can turn an expression into a statement by placing a semicolon at the end. Only certain 
 expressions can become statements, and you'll learn what these are as we continue through the course.
+
+## Literals
+
+*Literals* are values directly written into the source code. `0`, `3.4`, and `"hello"` are all examples of literals 
+since they represent their values literally. A string taken from the user is not a literal since the value of the 
+string isn't written directly in the code. If a literal is numeric, it's known as a *numeric literal*. If a literal is 
+character-based, it's known as a *character literal* or a *string literal* depending on whether it uses single or 
+double quotes.
+
+### Numeric Literal Suffixes and Formatting
+
+Numeric literals may include capital letters at the end to reflect the data type of the literal. For example, `3.99M` 
+represents a decimal literal, and `47U` represents an unsigned integer literal. The following table outlines the 
+literal suffixes and their meanings.
+
+| Suffix | Data Type | Meaning       |
+|--------|-----------|---------------|
+| `U`    | `uint`    | Unsigned      |
+| `L`    | `long`    | Long          |
+| `UL`   | `ulong`   | Unsigned long |
+| `F`    | `float`   | Float         |
+| `M`    | `decimal` | Money         |
+
+While these suffixes can be either uppercase or lowercase syntactically, you should prefer writing them in uppercase so 
+they can't be confused for digits. Lowercase "l"s and ones are similar in a lot of fonts.
+
+Additionally, while you can't include commas in numeric literals like you might want to for larger literals, you can 
+use underscores! This means we can write literals for large numbers like 1,000,000 as `1_000_000`. These underscores 
+can go anywhere you want, so you don't have to limit yourself to the way commas would be used with regular numbers. 
+This is because the underscores are ignored by the compiler. For example, the numeric literal `1___0.57_9` is valid and 
+represents the value 10.579. You should never write a literal this confusing, but it's possible. The only syntax 
+restriction on underscore placement is there must be at least one digit or underscore on either side of an underscore. 
+This means you can't start or end numeric literals with underscores, and underscores can't go around a decimal point if 
+it appears.
